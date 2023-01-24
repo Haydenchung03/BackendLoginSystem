@@ -54,3 +54,8 @@ let transporter = nodemailer.createTransport({
         pass: process.env.AUTH_PASS
     }
 });
+
+// home page
+app.get(['/', '/home'], (req, res) => {
+    res.render('pages/home', {session: req.session})
+});
