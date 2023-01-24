@@ -27,8 +27,9 @@ app.use(logger('dev'));
 app.use(express.static("." + ROOT_DIR_JS));
 app.use(express.json());
 app.set('views', './views');
+// Change your templating engine to whatever you want. I'm using pug.
 app.set('view engine', 'pug');
-
+const MongoDBStore = connectMongoDBSession(session);
 // You make rename this to something else.
 var store = new MongoDBStore({
     uri: 'mongodb://localhost:27017/my_database',
@@ -55,7 +56,40 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-// home page
+
 app.get(['/', '/home'], (req, res) => {
     res.render('pages/home', {session: req.session})
 });
+
+app.get('/login', (req, res) => {
+    res.render('pages/login', {session: req.session})
+});
+
+app.get('/register', (req, res) => {
+    res.render('pages/register', {session: req.session})
+});
+
+app.get('/about', (req, res) => {
+    res.render('pages/about', {session: req.session})
+});
+
+
+
+const loadData = async () => {
+	
+	
+    const result = await connect('mongodb://localhost:27017/KingOfHoops');
+    return result;
+
+};
+
+
+
+loadData()
+  .then(() => {
+
+    app.listen(PORT);
+    console.log("Listen on port:", PORT);
+
+  })
+  .catch(err => console.log(err));
