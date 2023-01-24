@@ -1,1 +1,5 @@
-This project is desgined to give users a backend login system in Javascript that allows users to register, encrypts the passwords, save username and password onto MongoDB database, and sends users email verification.
+This project is desgined to give users a backend login system in Javascript that allows users to register, encrypts the passwords, save username and password onto MongoDB database, sends users email verification and allows users to reset password. 
+
+Notes:
+
+The .env file was tested assuming that the email configurations will use a gmail account. Other accounts are not accounted for. 
